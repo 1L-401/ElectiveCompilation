@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rgCivil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payroll">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="411dp"
+        android:layout_height="731dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="EMPLOYEE PAYROLL COMPUTATION"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="91dp"
+            android:layout_marginEnd="76dp"
+            android:text="EMPLOYEE ID:"
+            app:layout_constraintEnd_toStartOf="@+id/spinID"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinID"
+            android:layout_width="0dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="95dp"
+            android:layout_marginBottom="34dp"
+            android:entries="@array/employee_ids"
+            app:layout_constraintBottom_toBottomOf="@+id/tvEName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="EMPLOYEE NAME:"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/tvEName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/spinPstcode"
+            app:layout_constraintStart_toStartOf="@+id/spinID" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="POSITION CODE:"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <Spinner
+            android:id="@+id/spinPstcode"
+            android:layout_width="136dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="12dp"
+            android:entries="@array/position_codes"
+            app:layout_constraintBottom_toTopOf="@+id/rgCivil"
+            app:layout_constraintStart_toStartOf="@+id/tvEName"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="73dp"
+            android:text="CIVIL STATUS:"
+            app:layout_constraintEnd_toStartOf="@+id/rgCivil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="NO. OF DAYS WORKED: "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/spinDays"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinDays"
+            android:layout_width="0dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="77dp"
+            android:entries="@array/days_worked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+        <Button
+            android:id="@+id/btnCompute"
+            android:layout_width="143dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="21dp"
+            android:text="COMPUTE"
+            app:layout_constraintBottom_toTopOf="@+id/btnClear"
+            app:layout_constraintEnd_toEndOf="@+id/btnClear"
+            app:layout_constraintStart_toStartOf="@+id/btnClear" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="143dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="115dp"
+            android:text="CLEAR"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rgCivil"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="77dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/spinDays"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <RadioButton
+                android:id="@+id/rbSingle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SINGLE" />
+
+            <RadioButton
+                android:id="@+id/rbMarried"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MARRIED" />
+
+            <RadioButton
+                android:id="@+id/rbWidowed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WIDOWED" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

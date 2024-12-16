@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:tag="constraintlayout"
+    tools:context=".DragandDrop">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="23dp"
+        android:text="Drag and Drop"
+        app:layout_constraintBottom_toTopOf="@+id/ivBatman"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBatman"
+        android:layout_width="151dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="22dp"
+        android:tag="batman"
+        app:layout_constraintBottom_toTopOf="@+id/ivWolverine"
+        app:layout_constraintEnd_toStartOf="@+id/ivIronman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:srcCompat="@drawable/batman" />
+
+    <ImageView
+        android:id="@+id/ivIronman"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="35dp"
+        android:tag="ironman"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBatman"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivBatman"
+        app:layout_constraintTop_toTopOf="@+id/ivBatman"
+        app:srcCompat="@drawable/ironman" />
+
+    <ImageView
+        android:id="@+id/ivWolverine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="57dp"
+        android:tag="wolverine"
+        app:layout_constraintBottom_toTopOf="@+id/tvNameOfHero"
+        app:layout_constraintEnd_toStartOf="@+id/ivSuperman"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBatman"
+        app:srcCompat="@drawable/wolverine" />
+
+    <ImageView
+        android:id="@+id/ivSuperman"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="35dp"
+        android:tag="superman"
+        app:layout_constraintBottom_toBottomOf="@+id/ivWolverine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivWolverine"
+        app:layout_constraintTop_toTopOf="@+id/ivWolverine"
+        app:srcCompat="@drawable/superman" />
+
+    <TextView
+        android:id="@+id/tvNameOfHero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:tag="heroName"
+        android:text="DRAG AND DROP YOUR HERO HERE!"
+        app:layout_constraintBottom_toTopOf="@+id/ivHero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivWolverine" />
+
+    <ImageView
+        android:id="@+id/ivHero"
+        android:layout_width="151dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="34dp"
+        android:tag="dropHere"
+        app:layout_constraintBottom_toTopOf="@+id/tvStatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameOfHero"
+        app:srcCompat="@drawable/hero" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="239dp"
+        android:tag="status"
+        android:text="Drag and Drop State Here!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHero" />
+</androidx.constraintlayout.widget.ConstraintLayout>
