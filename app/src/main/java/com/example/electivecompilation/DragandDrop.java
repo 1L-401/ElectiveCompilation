@@ -1,64 +1,135 @@
 package com.example.electivecompilation;
 
+import android.content.ClipData;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DragandDrop#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DragandDrop extends Fragment {
+    private ImageView batman, superman, ironman, wolverine, dropHere;
+    private TextView status, heroName;
+    private ConstraintLayout constraintLayout;
+    private Animation animateImage, animateText;
+    private Drawable drawable;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public DragandDrop() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DragandDrop.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DragandDrop newInstance(String param1, String param2) {
-        DragandDrop fragment = new DragandDrop();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_dragand_drop, container, false);
+        initializeViews(view);
+        setupDragListeners();
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dragand_drop, container, false);
+    private void initializeViews(View view) {
+        // Initialize animations
+        animateText = AnimationUtils.loadAnimation(requireContext(), R.anim.my_animation);
+        animateImage = AnimationUtils.loadAnimation(requireContext(), R.anim.blink);
+
+        // Initialize views
+        batman = view.findViewById(R.id.ivBatman);
+        superman = view.findViewById(R.id.ivSuperman);
+        wolverine = view.findViewById(R.id.ivWolverine);
+        ironman = view.findViewById(R.id.ivIronman);
+        dropHere = view.findViewById(R.id.ivHero);
+        status = view.findViewById(R.id.tvStatus);
+        heroName = view.findViewById(R.id.tvNameOfHero);
+        constraintLayout = view.findViewById(R.id.main);
+    }
+
+    private void setupDragListeners() {
+        // Set up touch listeners for all hero images
+        View.OnTouchListener touchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    ClipData clipData = ClipData.newPlainText("", "");
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                    view.startDrag(clipData, shadowBuilder, view, 0);
+                    view.setVisibility(View.INVISIBLE);
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        // Apply touch listener to all hero images
+        batman.setOnTouchListener(touchListener);
+        superman.setOnTouchListener(touchListener);
+        ironman.setOnTouchListener(touchListener);
+        wolverine.setOnTouchListener(touchListener);
+
+        // Set up drop zone
+        dropHere.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        status.setText("Dragging Started");
+                        return true;
+
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        status.setText("Drag Entered");
+
+                        return true;
+
+                    case DragEvent.ACTION_DRAG_LOCATION:
+                        return true;
+
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        status.setText("Drag Exited");
+                        v.setBackground(null); // Remove highlight
+                        return true;
+
+                    case DragEvent.ACTION_DROP:
+                        status.setText("Dropped");
+                        View view = (View) event.getLocalState();
+
+                        // Handle the drop
+                        if (view instanceof ImageView) {
+                            ImageView droppedImage = (ImageView) view;
+                            dropHere.setImageDrawable(droppedImage.getDrawable());
+                            dropHere.startAnimation(animateImage);
+
+                            // Update hero name based on the dropped image
+                            String heroName = "";
+                            if (view.getId() == R.id.ivBatman) heroName = "BATMAN";
+                            else if (view.getId() == R.id.ivSuperman) heroName = "SUPERMAN";
+                            else if (view.getId() == R.id.ivIronman) heroName = "IRONMAN";
+                            else if (view.getId() == R.id.ivWolverine) heroName = "WOLVERINE";
+
+                            DragandDrop.this.heroName.setText(heroName);
+                            DragandDrop.this.heroName.startAnimation(animateText);
+                        }
+
+                        view.setVisibility(View.VISIBLE);
+                        return true;
+
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        status.setText("Drag Ended");
+                        View draggedView = (View) event.getLocalState();
+                        draggedView.setVisibility(View.VISIBLE);
+                        v.setBackground(null); // Remove highlight
+                        return true;
+
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 }
